@@ -60,6 +60,7 @@
     {
       "endpoint": "/test/{id}",
       "input_headers":["*"],
+      "input_query_strings": ["*"],
       "backend": [
         {
           "host": [
