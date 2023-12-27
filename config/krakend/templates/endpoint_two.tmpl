@@ -5,7 +5,8 @@
    {
      "url_pattern": "/__debug",
      "extra_config": {
-       {{ include "rate_limit_backend.tmpl"}}
+       {{ include "rate_limit_backend.tmpl"}},
+       {{include "plugin_config.tmpl"}}
      },
      "host": ["{{ .service.default_host }}"]
    }

@@ -13,24 +13,28 @@
   },
   "endpoints": [
     {
-        "endpoint": "/test-1",
+        "endpoint": "/user/getUserDeatils",
         "method": "GET",
         "input_headers":["*"],
         "input_query_strings": ["*"],
         "backend": [
             {
-              "url_pattern": "/__debug/dev",
+              "url_pattern": "/user/getUserDeatils",
               "method": "GET",
               "host": [
-                "http://localhost:8080"
+                "http://users:3000"
               ],
               "extra_config": {
-                            "plugin/http-client": {
-              "name": "krakend-client-example",
-              "krakend-client-example": {
-                "path": "/__debug/hijack-me"
-              }
-            }
+                  "qos/ratelimit/proxy": {
+  "max_rate": 0.5,
+  "capacity": 1
+},
+                  "plugin/http-client": {
+  "name": "krakend-client-example",
+  "krakend-client-example": {
+    "path": "/__debug/hijack-me"
+  }
+}
 
               }
             }
@@ -49,12 +53,16 @@
                 "http://localhost:8080"
               ],
               "extra_config": {
-                            "plugin/http-client": {
-              "name": "krakend-client-example",
-              "krakend-client-example": {
-                "path": "/__debug/hijack-me"
-              }
-            }
+                  "qos/ratelimit/proxy": {
+  "max_rate": 0.5,
+  "capacity": 1
+},
+                  "plugin/http-client": {
+  "name": "krakend-client-example",
+  "krakend-client-example": {
+    "path": "/__debug/hijack-me"
+  }
+}
 
               }
             }
@@ -70,13 +78,10 @@
    {
      "url_pattern": "/__debug",
      "extra_config": {
-                   "plugin/http-client": {
-              "name": "krakend-client-example",
-              "krakend-client-example": {
-                "path": "/__debug/hijack-me"
-              }
-            }
-
+       "qos/ratelimit/proxy": {
+  "max_rate": 0.5,
+  "capacity": 1
+}
      },
      "host": ["http://localhost:8080"]
    }
@@ -93,12 +98,16 @@
    {
      "url_pattern": "/__debug",
      "extra_config": {
-                   "plugin/http-client": {
-              "name": "krakend-client-example",
-              "krakend-client-example": {
-                "path": "/__debug/hijack-me"
-              }
-            }
+       "qos/ratelimit/proxy": {
+  "max_rate": 0.5,
+  "capacity": 1
+},
+       "plugin/http-client": {
+  "name": "krakend-client-example",
+  "krakend-client-example": {
+    "path": "/__debug/hijack-me"
+  }
+}
 
      },
      "host": ["http://localhost:8080"]

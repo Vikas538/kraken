@@ -1,11 +1,11 @@
 {
     "endpoints": [
         {
-            "endpoint": "/test-1",
+            "endpoint": "/user/getUserDeatils",
             "method": "GET",
-            "backend_url_pattern": "/__debug/dev",
+            "backend_url_pattern": "/user/getUserDeatils",
             "backend_method": "GET",
-            "backend_host": "http://localhost:8080"
+            "backend_host": "http://users:3000"
         },
         {
             "endpoint": "/test-2",
