@@ -1,0 +1,111 @@
+{
+  "$schema": "https://www.krakend.io/schema/v3.json",
+  "version": 3,
+  "name": "KrakenD API Gateway (DEVELOPMENT)",
+  "port": 8080,
+  "timeout": "3s",
+  "cache_ttl":  "3s",
+  "output_encoding": "json",
+  "extra_config": {},
+  "plugin":  {
+    "pattern": ".so",
+    "folder": "/opt/krakend/plugins/"
+  },
+  "endpoints": [
+    {
+        "endpoint": "/test-1",
+        "method": "GET",
+        "input_headers":["*"],
+        "input_query_strings": ["*"],
+        "backend": [
+            {
+              "url_pattern": "/__debug/dev",
+              "method": "GET",
+              "host": [
+                "http://localhost:8080"
+              ],
+              "extra_config": {
+                            "plugin/http-client": {
+              "name": "krakend-client-example",
+              "krakend-client-example": {
+                "path": "/__debug/hijack-me"
+              }
+            }
+
+              }
+            }
+        ]
+    },
+    {
+        "endpoint": "/test-2",
+        "method": "GET",
+        "input_headers":["*"],
+        "input_query_strings": ["*"],
+        "backend": [
+            {
+              "url_pattern": "/__debug/dev",
+              "method": "GET",
+              "host": [
+                "http://localhost:8080"
+              ],
+              "extra_config": {
+                            "plugin/http-client": {
+              "name": "krakend-client-example",
+              "krakend-client-example": {
+                "path": "/__debug/hijack-me"
+              }
+            }
+
+              }
+            }
+        ]
+    },
+    {
+   "endpoint": "/test/profile",
+  "input_headers": [
+        "Content-Type",
+        "ClientId"
+      ],
+   "backend": [
+   {
+     "url_pattern": "/__debug",
+     "extra_config": {
+                   "plugin/http-client": {
+              "name": "krakend-client-example",
+              "krakend-client-example": {
+                "path": "/__debug/hijack-me"
+              }
+            }
+
+     },
+     "host": ["http://localhost:8080"]
+   }
+   ]
+ }
+,
+{
+   "endpoint": "/test/admin",
+  "input_headers": [
+        "Content-Type",
+        "ClientId"
+      ],
+   "backend": [
+   {
+     "url_pattern": "/__debug",
+     "extra_config": {
+                   "plugin/http-client": {
+              "name": "krakend-client-example",
+              "krakend-client-example": {
+                "path": "/__debug/hijack-me"
+              }
+            }
+
+     },
+     "host": ["http://localhost:8080"]
+   }
+   ]
+ }
+
+
+ ]
+}

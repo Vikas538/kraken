@@ -4,15 +4,24 @@ services:
     # The :watch image restarts the service automatically hen the configuration files change.
     # Do not use this image in production, it's meant to speed up your testing and development.
     image: devopsfaith/krakend:watch
+    container_name: krakenS
     volumes:
       - ./config/krakend:/etc/krakend
       # - ./config/krakend/jwt.txt:/etc/krakend
       - ./krakend-client-example:/opt/krakend/plugins/
+    environment:
+      - FC_ENABLE=1
+      - FC_SETTINGS=/etc/krakend/settings/dev
+      - FC_PARTIALS=/etc/krakend/partials
+      - FC_TEMPLATES=/etc/krakend/templates
+      - FC_OUT=out.json
+      - SERVICE_NAME=KrakenD API Gateway
     ports:
       - "1234:1234"
       - "8080:8080"
       - "8090:8090"
-    command: ["run", "-d", "-c", "/etc/krakend/krakend.json"]
+    # command: ["run", "-d", "-c", "/etc/krakend/krakend.json"]
+    command: [ "run", "-dc", "/etc/krakend/krakend.tmpl", "" ]
     networks:
       - shared_network
   # grafana:
