@@ -1,5 +1,5 @@
 # Use devopsfaith/krakend:watch as the base image
-FROM devopsfaith/krakend:watch
+FROM devopsfaith/krakend:2.5.0-watch
 
 # Set the working directory for custom plugin
 
