@@ -22,10 +22,10 @@ services:
     command: [ "run", "-dc", "/etc/krakend/krakend.tmpl", "" ]
     networks:
       - shared_network
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "15672:15672"
+  # rabbitmq:
+  #   image: rabbitmq:3-management
+  #   ports:
+  #     - "15672:15672"
 networks:
   shared_network:
     external: true

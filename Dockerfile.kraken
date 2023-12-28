@@ -1,0 +1,27 @@
+# Use devopsfaith/krakend:watch as the base image
+FROM devopsfaith/krakend:watch
+
+# Set the working directory for custom plugin
+
+ENV FC_ENABLE=1
+ENV FC_SETTINGS=/etc/krakend/settings/dev
+ENV FC_PARTIALS=/etc/krakend/partials
+ENV FC_TEMPLATES=/etc/krakend/templates
+ENV FC_OUT=out.json
+ENV SERVICE_NAME="KrakenD API Gateway"
+WORKDIR /etc/krakend
+
+COPY ./config/krakend /etc/krakend/
+
+WORKDIR /opt/krakend/plugins/
+
+EXPOSE 1234 8080 8090
+
+# Copy your custom plugin files into the Krakend plugins directory
+COPY ./krakend-client-example /opt/krakend/plugins/
+
+# Optionally, you can add any other customization or configurations here
+
+# Continue with the original entry point and command from the base image
+ENTRYPOINT ["krakend"]
+CMD [ "run", "-dc", "/etc/krakend/krakend.tmpl", "" ]

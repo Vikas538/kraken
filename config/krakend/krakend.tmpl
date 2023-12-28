@@ -22,7 +22,6 @@
                 "{{ $endpoint.backend_host }}"
               ],
               "extra_config": {
-                  {{ include "rate_limit_backend.tmpl"}},
                   {{include "plugin_config.tmpl"}}
               }
             }
