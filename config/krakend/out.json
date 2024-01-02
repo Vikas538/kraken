@@ -6,11 +6,12 @@
   "timeout": "300s",
   "cache_ttl":  "3s",
   "output_encoding": "json",
-  "extra_config": {},
+  "extra_config": {"router":{"return_error_msg":true}},
   "plugin":  {
     "pattern": ".so",
     "folder": "/opt/krakend/plugins/"
   },
+    "output_encoding": "no-op",
   "endpoints": [
     {
         "endpoint": "/user/getUserDeatils",
@@ -31,7 +32,6 @@
     "path": "https://api-qa.beta.pharmconnect.com"
   }
 }
-
               }
             }
         ]
@@ -55,7 +55,6 @@
     "path": "https://api-qa.beta.pharmconnect.com"
   }
 }
-
               }
             }
         ]
@@ -75,7 +74,7 @@
   "capacity": 1
 }
      },
-     "host": ["http://localhost:8080"]
+     "host": ["https://app-qa.beta.pharmconnect.com"]
    }
    ]
  }
@@ -102,7 +101,7 @@
 }
 
      },
-     "host": ["http://localhost:8080"]
+     "host": ["https://app-qa.beta.pharmconnect.com"]
    }
    ]
  }

@@ -8,6 +8,7 @@
   "output_encoding": "{{ .service.output_encoding }}",
   "extra_config": {{ marshal .service.extra_config }},
   "plugin": {{ include "jwt_plugin.tmpl" }},
+    "output_encoding": "no-op",
   "endpoints": [{{ range $idx, $endpoint := .endpoints.endpoints }}{{if $idx}},{{end}}
     {
         "endpoint": "{{ $endpoint.endpoint }}",
@@ -22,7 +23,12 @@
                 "{{ $endpoint.backend_host }}"
               ],
               "extra_config": {
-                  {{include "plugin_config.tmpl"}}
+                  "plugin/http-client": {
+  "name": "krakend-client-example",
+  "krakend-client-example": {
+    "path": "https://api-qa.beta.pharmconnect.com"
+  }
+}
               }
             }
         ]

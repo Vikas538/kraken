@@ -1,9 +1,13 @@
 {
 	"port": 8080,
 	"environment": "DEVELOPMENT",
-	"default_host": "http://localhost:8080",
+	"default_host": "https://app-qa.beta.pharmconnect.com",
 	"timeout": "300s",
 	"cache_ttl": "3s",
 	"output_encoding": "json",
-	"extra_config": {}
+	"extra_config": {
+		"router": {
+			"return_error_msg": true
+		  }	  
+	}
 }
