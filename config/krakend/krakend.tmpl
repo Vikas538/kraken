@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.krakend.io/schema/v3.json",
   "version": 3,
-  "name": "{{ env "SERVICE_NAME" }} ({{ .service.environment }})",
+  "name": "{{ env "SERVICE_NAME" }} ({{ env "ENV" }})",
   "port": {{ .service.port }},
   "timeout": "{{ .service.timeout }}",
   "cache_ttl":  "{{ .service.cache_ttl }}",
@@ -9,7 +9,8 @@
   "extra_config": {{ marshal .service.extra_config }},
   "plugin": {{ include "jwt_plugin.tmpl" }},
     "output_encoding": "no-op",
-  "endpoints": [{{ range $idx, $endpoint := .endpoints.endpoints }}{{if $idx}},{{end}}
+  "endpoints": [
+       {{ range $idx, $endpoint := .endpoints_claims.example_group }}{{if $idx}},{{end}}
     {
         "endpoint": "{{ $endpoint.endpoint }}",
         "method": "{{ $endpoint.method }}",
@@ -19,20 +20,17 @@
             {
               "url_pattern": "{{ $endpoint.backend_url_pattern }}",
               "method": "{{ $endpoint.backend_method }}",
-              "host": [
-                "{{ $endpoint.backend_host }}"
-              ],
+              "host": ["{{ index $ (env "ENV") "host_member" }}"],
               "extra_config": {
                   "plugin/http-client": {
   "name": "krakend-client-example",
   "krakend-client-example": {
-    "path": "https://api-qa.beta.pharmconnect.com"
+    "path": "{{$.service.default_host}}"
   }
 }
               }
             }
         ]
-    }{{ end }},
-    {{ template "endpoints.tmpl" . }}
+    }{{ end }}
  ]
 }

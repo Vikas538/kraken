@@ -1,0 +1,32 @@
+{
+    "example_group": [
+        {
+            "endpoint": "/user/getUserDeatils",
+            "method": "GET",
+            "backend_url_pattern": "/user/getUserDeatils",
+            "backend_method": "GET",
+            "backend_host": "http://users:3000"
+        },
+        {
+            "endpoint": "/test-2",
+            "method": "GET",
+            "backend_url_pattern": "/__debug/dev",
+            "backend_method": "GET",
+            "backend_host": "http://localhost:8080"
+        },
+        {
+            "endpoint": "/user/getUserDeatils",
+            "method": "POST",
+            "backend_url_pattern": "/user/getUserDeatils",
+            "backend_method": "POST",
+            "backend_host": "http://users:3000"
+        },
+        {
+            "endpoint": "/claims/return-orders/list/{workspaceId}",
+            "method": "POST",
+            "backend_url_pattern": "/claims/return-orders/list/{workspaceId}",
+            "backend_method": "POST",
+            "backend_host": "https://api-dev.beta.pharmconnect.com"
+        }
+    ]
+}

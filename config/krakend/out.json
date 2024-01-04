@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.krakend.io/schema/v3.json",
   "version": 3,
-  "name": "KrakenD API Gateway (DEVELOPMENT)",
+  "name": "KrakenD API Gateway (dev)",
   "port": 8080,
   "timeout": "300s",
   "cache_ttl":  "3s",
@@ -13,6 +13,7 @@
   },
     "output_encoding": "no-op",
   "endpoints": [
+       
     {
         "endpoint": "/user/getUserDeatils",
         "method": "GET",
@@ -22,14 +23,12 @@
             {
               "url_pattern": "/user/getUserDeatils",
               "method": "GET",
-              "host": [
-                "http://users:3000"
-              ],
+              "host": ["http://member.dev-host.com"],
               "extra_config": {
                   "plugin/http-client": {
   "name": "krakend-client-example",
   "krakend-client-example": {
-    "path": "https://api-qa.beta.pharmconnect.com"
+    "path": "https://api-dev.beta.pharmconnect.com"
   }
 }
               }
@@ -45,14 +44,12 @@
             {
               "url_pattern": "/__debug/dev",
               "method": "GET",
-              "host": [
-                "http://localhost:8080"
-              ],
+              "host": ["http://member.dev-host.com"],
               "extra_config": {
                   "plugin/http-client": {
   "name": "krakend-client-example",
   "krakend-client-example": {
-    "path": "https://api-qa.beta.pharmconnect.com"
+    "path": "https://api-dev.beta.pharmconnect.com"
   }
 }
               }
@@ -60,52 +57,46 @@
         ]
     },
     {
-   "endpoint": "/test/profile",
-  "input_headers": [
-        "Content-Type",
-        "ClientId"
-      ],
-   "backend": [
-   {
-     "url_pattern": "/__debug",
-     "extra_config": {
-       "qos/ratelimit/proxy": {
-  "max_rate": 0.5,
-  "capacity": 1
-}
-     },
-     "host": ["https://app-qa.beta.pharmconnect.com"]
-   }
-   ]
- }
-,
-{
-   "endpoint": "/test/admin",
-  "input_headers": [
-        "Content-Type",
-        "ClientId"
-      ],
-   "backend": [
-   {
-     "url_pattern": "/__debug",
-     "extra_config": {
-       "qos/ratelimit/proxy": {
-  "max_rate": 0.5,
-  "capacity": 1
-},
-       "plugin/http-client": {
+        "endpoint": "/user/getUserDeatils",
+        "method": "POST",
+        "input_headers":["*"],
+        "input_query_strings": ["*"],
+        "backend": [
+            {
+              "url_pattern": "/user/getUserDeatils",
+              "method": "POST",
+              "host": ["http://member.dev-host.com"],
+              "extra_config": {
+                  "plugin/http-client": {
   "name": "krakend-client-example",
   "krakend-client-example": {
-    "path": "https://api-qa.beta.pharmconnect.com"
+    "path": "https://api-dev.beta.pharmconnect.com"
   }
 }
-
-     },
-     "host": ["https://app-qa.beta.pharmconnect.com"]
-   }
-   ]
- }
-
-
+              }
+            }
+        ]
+    },
+    {
+        "endpoint": "/claims/return-orders/list/{workspaceId}",
+        "method": "POST",
+        "input_headers":["*"],
+        "input_query_strings": ["*"],
+        "backend": [
+            {
+              "url_pattern": "/claims/return-orders/list/{workspaceId}",
+              "method": "POST",
+              "host": ["http://member.dev-host.com"],
+              "extra_config": {
+                  "plugin/http-client": {
+  "name": "krakend-client-example",
+  "krakend-client-example": {
+    "path": "https://api-dev.beta.pharmconnect.com"
+  }
+}
+              }
+            }
+        ]
+    }
  ]
 }

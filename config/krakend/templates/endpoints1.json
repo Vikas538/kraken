@@ -1,0 +1,11 @@
+{
+    "endpoints": [
+        {
+            "endpoint": "/user/getUserDeatils",
+            "method": "GET",
+            "backend_url_pattern": "/user/getUserDeatils",
+            "backend_method": "GET",
+            "backend_host": "http://users:3000"
+        }
+    ]
+}

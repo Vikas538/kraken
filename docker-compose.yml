@@ -10,11 +10,13 @@ services:
       - ./krakend-client-example:/opt/krakend/plugins/
     environment:
       - FC_ENABLE=1
-      - FC_SETTINGS=/etc/krakend/settings/dev
+      - FC_SETTINGS=/etc/krakend/settings
       - FC_PARTIALS=/etc/krakend/partials
       - FC_TEMPLATES=/etc/krakend/templates
       - FC_OUT=out.json
       - SERVICE_NAME=KrakenD API Gateway
+      - SERVICE_NAME2=test
+      - ENV=dev
     ports:
       - "1234:1234"
       - "8080:8080"

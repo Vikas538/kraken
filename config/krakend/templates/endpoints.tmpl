@@ -1,2 +1,7 @@
-{{ template "endpoint_one.tmpl" . }},
-{{ template "endpoint_two.tmpl" . }}
+{{ range $index, $endpoint := .endpoints1.endpoint }}
+    {{if $index}},{{end}}
+    {
+        "endpoint": "{{ $endpoint.endpoint }}",
+        "backend": []
+    }
+{{end}}
