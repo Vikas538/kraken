@@ -6,7 +6,8 @@
             "backend_url_pattern": "/user/getUserDeatils",
             "backend_method": "GET",
             "backend_host": "http://users:3000",
-            "authPlugin":true
+            "authPlugin":true,
+            "permissions":"test1,test2"
         }
     ]
 }

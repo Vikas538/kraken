@@ -11,7 +11,7 @@
                     "host": ["{{ .host }}"]
                     {{ if  .endpoints.authPlugin  }}
                     ,"extra_config": {
-                        {{ $data := dict "host" .host "secretName" .secretName  }} 
+                        {{ $data := dict "host" .host "secretName" .secretName "permissions" .endpoints.permissions  }} 
                         {{template "auth_plugin.tmpl" $data}}
                     }
                     {{ end }}

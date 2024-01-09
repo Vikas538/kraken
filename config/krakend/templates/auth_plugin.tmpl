@@ -2,6 +2,7 @@
                 "name": "auth-plugin",
                 "auth-plugin": {
                   "path": "{{ index . "host" }}",  
-                  "secrectName": "{{ index . "secretName" }}"
+                  "secrectName": "{{ index . "secretName" }}",
+                  "permissions": "{{ index . "permissions" }}"
                 }
               }
