@@ -1,7 +1,0 @@
-{{ range $index, $endpoint := .endpoints1.endpoint }}
-    {{if $index}},{{end}}
-    {
-        "endpoint": "{{ $endpoint.endpoint }}",
-        "backend": []
-    }
-{{end}}

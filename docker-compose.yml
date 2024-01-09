@@ -4,7 +4,7 @@ services:
     # The :watch image restarts the service automatically hen the configuration files change.
     # Do not use this image in production, it's meant to speed up your testing and development.
     image: devopsfaith/krakend:watch
-    container_name: krakenS
+    container_name: krakend
     volumes:
       - ./config/krakend:/etc/krakend
       - ./krakend-client-example:/opt/krakend/plugins/
@@ -17,6 +17,7 @@ services:
       - SERVICE_NAME=KrakenD API Gateway
       - SERVICE_NAME2=test
       - ENV=dev
+      - AWS_PROFILE=pharmconnect
     ports:
       - "1234:1234"
       - "8080:8080"

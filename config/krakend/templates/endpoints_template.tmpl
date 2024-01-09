@@ -1,0 +1,10 @@
+
+    {{ range $idx, $endpoint := .endpoints_claims.example_group }}{{if $idx}},{{end}}
+        {{ $data := dict "host" (index $ (env "ENV") "host") "secretName" (index $ (env "ENV") "serverSecretName")  "endpoints" $endpoint}} 
+        {{template "endpointTemplate" $data}}
+    {{end}},
+    {{ range $idx, $endpoint := .endpoints_communication_v2.example_group }}{{if $idx}},{{end}}
+        {{ $data := dict "host" (index $ (env "ENV") "host") "secretName" (index $ (env "ENV") "serverSecretName")  "endpoints" $endpoint}} 
+        {{template "endpointTemplate" $data}}
+    {{end}}
+

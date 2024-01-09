@@ -1,0 +1,21 @@
+{{define "endpointTemplate"}}
+{
+            "endpoint":"{{ .endpoints.endpoint }}",
+            "method":  "{{ .endpoints.backend_method }}",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "{{ .endpoints.endpoint }}",
+                    "method": "{{ .endpoints.backend_method }}",
+                    "host": ["{{ .host }}"]
+                    {{ if  .endpoints.authPlugin  }}
+                    ,"extra_config": {
+                        {{ $data := dict "host" .host "secretName" .secretName  }} 
+                        {{template "auth_plugin.tmpl" $data}}
+                    }
+                    {{ end }}
+                }
+            ]
+    }
+{{end}}

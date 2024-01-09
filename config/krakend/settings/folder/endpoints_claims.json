@@ -1,0 +1,33 @@
+{
+    "example_group": [
+        {
+            "endpoint": "/user/getUserDeatils",
+            "method": "GET",
+            "backend_url_pattern": "/user/getUserDeatils",
+            "backend_method": "GET",
+            "backend_host": "http://users:3000",
+            "plugin":true
+        },
+        {
+            "endpoint": "/test-2",
+            "method": "GET",
+            "backend_url_pattern": "/__debug/dev",
+            "backend_method": "GET",
+            "authPlugin":true
+        },
+        {
+            "endpoint": "/user/getUserDeatils",
+            "method": "POST",
+            "backend_url_pattern": "/user/getUserDeatils",
+            "backend_method": "POST",
+            "authPlugin":true
+        },
+        {
+            "endpoint": "/claims/return-orders/list/{workspaceId}",
+            "method": "POST",
+            "backend_url_pattern": "/claims/return-orders/list/{workspaceId}",
+            "backend_method": "POST",
+            "authPlugin":false
+        }
+    ]
+}

@@ -8,29 +8,5 @@
   "output_encoding": "{{ .service.output_encoding }}",
   "extra_config": {{ marshal .service.extra_config }},
   "plugin": {{ include "jwt_plugin.tmpl" }},
-    "output_encoding": "no-op",
-  "endpoints": [
-       {{ range $idx, $endpoint := .endpoints_claims.example_group }}{{if $idx}},{{end}}
-    {
-        "endpoint": "{{ $endpoint.endpoint }}",
-        "method": "{{ $endpoint.method }}",
-        "input_headers":["*"],
-        "input_query_strings": ["*"],
-        "backend": [
-            {
-              "url_pattern": "{{ $endpoint.backend_url_pattern }}",
-              "method": "{{ $endpoint.backend_method }}",
-              "host": ["{{ index $ (env "ENV") "host_member" }}"],
-              "extra_config": {
-                  "plugin/http-client": {
-  "name": "krakend-client-example",
-  "krakend-client-example": {
-    "path": "{{$.service.default_host}}"
-  }
-}
-              }
-            }
-        ]
-    }{{ end }}
- ]
+  "endpoints": [{{template "endpoints_template.tmpl" .}}]
 }

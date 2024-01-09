@@ -4,99 +4,297 @@
   "name": "KrakenD API Gateway (dev)",
   "port": 8080,
   "timeout": "300s",
-  "cache_ttl":  "3s",
-  "output_encoding": "json",
-  "extra_config": {"router":{"return_error_msg":true}},
-  "plugin":  {
+  "cache_ttl": "3s",
+  "output_encoding": "no-op",
+  "extra_config": {
+    "router": {
+      "return_error_msg": true
+    }
+  },
+  "plugin": {
     "pattern": ".so",
     "folder": "/opt/krakend/plugins/"
   },
-    "output_encoding": "no-op",
   "endpoints": [
-       
     {
-        "endpoint": "/user/getUserDeatils",
-        "method": "GET",
-        "input_headers":["*"],
-        "input_query_strings": ["*"],
-        "backend": [
-            {
-              "url_pattern": "/user/getUserDeatils",
-              "method": "GET",
-              "host": ["http://member.dev-host.com"],
-              "extra_config": {
-                  "plugin/http-client": {
-  "name": "krakend-client-example",
-  "krakend-client-example": {
-    "path": "https://api-dev.beta.pharmconnect.com"
-  }
-}
+      "endpoint": "/user/getUserDeatils",
+      "method": "GET",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/user/getUserDeatils",
+          "method": "GET",
+          "host": [
+            "https://api-dev.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "path": "https://api-dev.beta.pharmconnect.com",
+                "secrectName": "pharmconnect-dev-server-jwt-config"
               }
             }
-        ]
+          }
+        }
+      ]
     },
     {
-        "endpoint": "/test-2",
-        "method": "GET",
-        "input_headers":["*"],
-        "input_query_strings": ["*"],
-        "backend": [
-            {
-              "url_pattern": "/__debug/dev",
-              "method": "GET",
-              "host": ["http://member.dev-host.com"],
-              "extra_config": {
-                  "plugin/http-client": {
-  "name": "krakend-client-example",
-  "krakend-client-example": {
-    "path": "https://api-dev.beta.pharmconnect.com"
-  }
-}
+      "endpoint": "/kraken/communication-v2/api/channels/{id}",
+      "method": "GET",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/kraken/communication-v2/api/channels/{id}",
+          "method": "GET",
+          "host": [
+            "https://api-dev.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "path": "https://api-dev.beta.pharmconnect.com",
+                "secrectName": "pharmconnect-dev-server-jwt-config"
               }
             }
-        ]
+          }
+        }
+      ]
     },
     {
-        "endpoint": "/user/getUserDeatils",
-        "method": "POST",
-        "input_headers":["*"],
-        "input_query_strings": ["*"],
-        "backend": [
-            {
-              "url_pattern": "/user/getUserDeatils",
-              "method": "POST",
-              "host": ["http://member.dev-host.com"],
-              "extra_config": {
-                  "plugin/http-client": {
-  "name": "krakend-client-example",
-  "krakend-client-example": {
-    "path": "https://api-dev.beta.pharmconnect.com"
-  }
-}
+      "endpoint": "/kraken/communication-v2/api/channel/member",
+      "method": "POST",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/kraken/communication-v2/api/channel/member",
+          "method": "POST",
+          "host": [
+            "https://api-dev.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "path": "https://api-dev.beta.pharmconnect.com",
+                "secrectName": "pharmconnect-dev-server-jwt-config"
               }
             }
-        ]
+          }
+        }
+      ]
     },
     {
-        "endpoint": "/claims/return-orders/list/{workspaceId}",
-        "method": "POST",
-        "input_headers":["*"],
-        "input_query_strings": ["*"],
-        "backend": [
-            {
-              "url_pattern": "/claims/return-orders/list/{workspaceId}",
-              "method": "POST",
-              "host": ["http://member.dev-host.com"],
-              "extra_config": {
-                  "plugin/http-client": {
-  "name": "krakend-client-example",
-  "krakend-client-example": {
-    "path": "https://api-dev.beta.pharmconnect.com"
-  }
-}
+      "endpoint": "/kraken/communication-v2/api/channels/{id}",
+      "method": "DELETE",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/kraken/communication-v2/api/channels/{id}",
+          "method": "DELETE",
+          "host": [
+            "https://api-dev.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "path": "https://api-dev.beta.pharmconnect.com",
+                "secrectName": "pharmconnect-dev-server-jwt-config"
               }
             }
-        ]
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/kraken/communication-v2/api/folder/{id}",
+      "method": "GET",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/kraken/communication-v2/api/folder/{id}",
+          "method": "GET",
+          "host": [
+            "https://api-dev.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "path": "https://api-dev.beta.pharmconnect.com",
+                "secrectName": "pharmconnect-dev-server-jwt-config"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/kraken/communication-v2/api/folder/{id}",
+      "method": "POST",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/kraken/communication-v2/api/folder/{id}",
+          "method": "POST",
+          "host": [
+            "https://api-dev.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "path": "https://api-dev.beta.pharmconnect.com",
+                "secrectName": "pharmconnect-dev-server-jwt-config"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/kraken/communication-v2/api/folder/{id}",
+      "method": "DELETE",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/kraken/communication-v2/api/folder/{id}",
+          "method": "DELETE",
+          "host": [
+            "https://api-dev.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "path": "https://api-dev.beta.pharmconnect.com",
+                "secrectName": "pharmconnect-dev-server-jwt-config"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/kraken/communication-v2/api/channels/move/{id}",
+      "method": "POST",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/kraken/communication-v2/api/channels/move/{id}",
+          "method": "POST",
+          "host": [
+            "https://api-dev.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "path": "https://api-dev.beta.pharmconnect.com",
+                "secrectName": "pharmconnect-dev-server-jwt-config"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/kraken/communication-v2/api/channels",
+      "method": "POST",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/kraken/communication-v2/api/channels",
+          "method": "POST",
+          "host": [
+            "https://api-dev.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "path": "https://api-dev.beta.pharmconnect.com",
+                "secrectName": "pharmconnect-dev-server-jwt-config"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/kraken/communication-v2/api/channel/member",
+      "method": "GET",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/kraken/communication-v2/api/channel/member",
+          "method": "GET",
+          "host": [
+            "https://api-dev.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "path": "https://api-dev.beta.pharmconnect.com",
+                "secrectName": "pharmconnect-dev-server-jwt-config"
+              }
+            }
+          }
+        }
+      ]
     }
- ]
+  ]
 }

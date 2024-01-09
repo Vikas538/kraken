@@ -4,13 +4,14 @@
 	"default_host": "https://api-dev.beta.pharmconnect.com",
 	"timeout": "300s",
 	"cache_ttl": "3s",
-	"output_encoding": "json",
+	"output_encoding": "no-op",
 	"extra_config": {
 		"router": {
 			"return_error_msg": true
 		  }
 		},
 		"dev": {
-			"backend_host" :"helloworld"
-			}
+			"backend_host" :"hellrld"
+			},
+		"files":["endpoints_claims","endpoints_communication_v2"]
 }

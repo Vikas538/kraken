@@ -1,0 +1,7 @@
+              "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "path": "{{ index . "host" }}",  
+                  "secrectName": "{{ index . "secretName" }}"
+                }
+              }
