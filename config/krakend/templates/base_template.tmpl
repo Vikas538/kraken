@@ -8,10 +8,10 @@
                 {
                     "url_pattern": "{{ .endpoints.endpoint }}",
                     "method": "{{ .endpoints.backend_method }}",
-                    "host": ["{{ .host }}"]
+                    "host": ["http://users:3000"]
                     {{ if  .endpoints.authPlugin  }}
                     ,"extra_config": {
-                        {{ $data := dict "host" .host "secretName" .secretName "permissions" .endpoints.permissions  }} 
+                        {{ $data := dict "host" .host "serverSecretName" .serverSecretName "permissions" .endpoints.permissions "jwtSecretName" .jwtSecretName}} 
                         {{template "auth_plugin.tmpl" $data}}
                     }
                     {{ end }}

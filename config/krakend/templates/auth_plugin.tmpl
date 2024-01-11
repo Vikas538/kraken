@@ -1,8 +1,9 @@
               "plugin/http-client": {
                 "name": "auth-plugin",
                 "auth-plugin": {
-                  "path": "{{ index . "host" }}",  
-                  "secrectName": "{{ index . "secretName" }}",
+                  "host": "{{ index . "host" }}",  
+                  "serverSecretName": "{{ index . "serverSecretName" }}",
+                  "jwtSecretName":"{{ index . "jwtSecretName" }}",
                   "permissions": "{{ index . "permissions" }}"
                 }
               }

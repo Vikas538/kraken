@@ -7,7 +7,7 @@
             "backend_method": "GET",
             "backend_host": "http://users:3000",
             "authPlugin":true,
-            "permissions":"test1,test2"
+            "permissions":"collection_report_write,role_assignment_write"
         }
     ]
 }

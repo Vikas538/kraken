@@ -7,7 +7,7 @@ services:
     container_name: krakend
     volumes:
       - ./config/krakend:/etc/krakend
-      - ./krakend-client-example:/opt/krakend/plugins/
+      - ./auth-plugin:/opt/krakend/plugins/
     environment:
       - FC_ENABLE=1
       - FC_SETTINGS=/etc/krakend/settings
@@ -17,7 +17,6 @@ services:
       - SERVICE_NAME=KrakenD API Gateway
       - SERVICE_NAME2=test
       - ENV=dev
-      - AWS_PROFILE=pharmconnect
     ports:
       - "1234:1234"
       - "8080:8080"
