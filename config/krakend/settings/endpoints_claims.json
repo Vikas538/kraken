@@ -10,7 +10,7 @@
             "permissions":"collection_report_write,role_assignment_write"
         },
         {
-            "endpoint": "/claims/return-orders/list/{id}",
+            "endpoint": "/hub/claims/return-orders/list/{id}",
             "method": "POST",
             "backend_url_pattern": "/claims/return-orders/list/{id}",
             "backend_method": "POST",
