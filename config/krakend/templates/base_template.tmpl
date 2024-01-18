@@ -8,7 +8,7 @@
                 {
                     "url_pattern": "{{ .endpoints.endpoint }}",
                     "method": "{{ .endpoints.backend_method }}",
-                    "host": ["http://users:3000"]
+                    "host": ["{{ .host }}"]
                     {{ if  .endpoints.authPlugin  }}
                     ,"extra_config": {
                         {{ $data := dict "host" .host "serverSecretName" .serverSecretName "permissions" .endpoints.permissions "jwtSecretName" .jwtSecretName}} 

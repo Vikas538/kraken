@@ -1,94 +1,85 @@
 {
-    "example_group": [
+    "endpoints": [
         {
             "endpoint": "/kraken/communication-v2/api/channels/{id}",
             "method": "GET",
             "backend_url_pattern": "/communication-v2/api/channels/{id}",
             "backend_method": "GET",
-            "z": "https://api-dev.beta.pharmconnect.com",
-            "authPlugin":true,
-            "permissions":["test1","test2"]
-
+            "backend_host": "https://api-dev.beta.pharmconnect.com",
+            "authPlugin": true,
+            "permissions": ""
         },
         {
             "endpoint": "/kraken/communication-v2/api/channel/member",
             "method": "POST",
             "backend_url_pattern": "/communication-v2/api/channel/member",
             "backend_method": "POST",
-            "z": "https://api-dev.beta.pharmconnect.com",
-            "authPlugin":true,
-"permissions":["test1","test2"]
-
+            "backend_host": "https://api-dev.beta.pharmconnect.com",
+            "authPlugin": true,
+            "permissions": ""
         },
         {
             "endpoint": "/kraken/communication-v2/api/channels/{id}",
             "method": "DELETE",
             "backend_url_pattern": "/communication-v2/api/channels/{id}",
             "backend_method": "DELETE",
-            "z": "https://api-dev.beta.pharmconnect.com",
-            "authPlugin":true,
-"permissions":["test1","test2"]
-
+            "backend_host": "https://api-dev.beta.pharmconnect.com",
+            "authPlugin": true,
+            "permissions": ""
         },
         {
             "endpoint": "/kraken/communication-v2/api/folder/{id}",
             "method": "GET",
             "backend_url_pattern": "/communication-v2/api/folder/{id}",
             "backend_method": "GET",
-            "z": "https://api-dev.beta.pharmconnect.com",
-            "authPlugin":true,
-"permissions":["test1","test2"]
-
+            "backend_host": "https://api-dev.beta.pharmconnect.com",
+            "authPlugin": true,
+            "permissions": ""
         },
         {
             "endpoint": "/kraken/communication-v2/api/folder/{id}",
             "method": "POST",
             "backend_url_pattern": "/communication-v2/api/folder/{id}",
             "backend_method": "POST",
-            "z": "https://api-dev.beta.pharmconnect.com",
-            "authPlugin":true,
-"permissions":["test1","test2"]
-
+            "backend_host": "https://api-dev.beta.pharmconnect.com",
+            "authPlugin": true,
+            "permissions": ""
         },
         {
             "endpoint": "/kraken/communication-v2/api/folder/{id}",
             "method": "DELETE",
             "backend_url_pattern": "/communication-v2/api/folder/{id}",
             "backend_method": "DELETE",
-            "z": "https://api-dev.beta.pharmconnect.com",
-            "authPlugin":true,
-"permissions":["test1","test2"]
-
+            "backend_host": "https://api-dev.beta.pharmconnect.com",
+            "authPlugin": true,
+            "permissions": ""
         },
         {
             "endpoint": "/kraken/communication-v2/api/channels/move/{id}",
             "method": "POST",
             "backend_url_pattern": "/communication-v2/api/channels/move/{id}",
             "backend_method": "POST",
-            "z": "https://api-dev.beta.pharmconnect.com",
-            "authPlugin":true,
-"permissions":["test1","test2"]
-
+            "backend_host": "https://api-dev.beta.pharmconnect.com",
+            "authPlugin": true,
+            "permissions": ""
         },
         {
             "endpoint": "/kraken/communication-v2/api/channels",
             "method": "POST",
             "backend_url_pattern": "/communication-v2/api/channels",
             "backend_method": "POST",
-            "z": "https://api-dev.beta.pharmconnect.com",
-            "authPlugin":true,
-"permissions":["test1","test2"]
-
+            "backend_host": "https://api-dev.beta.pharmconnect.com",
+            "authPlugin": true,
+            "permissions": ""
         },
         {
             "endpoint": "/kraken/communication-v2/api/channel/member",
             "method": "GET",
             "backend_url_pattern": "/communication-v2/api/channel/member",
             "backend_method": "GET",
-            "z": "https://api-dev.beta.pharmconnect.com",
-            "authPlugin":true,
-"permissions":["test1","test2"]
-
+            "backend_host": "https://api-dev.beta.pharmconnect.com",
+            "authPlugin": true,
+            "permissions": ""
         }
     ]
 }

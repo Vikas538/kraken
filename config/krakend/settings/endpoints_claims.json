@@ -1,13 +1,22 @@
 {
-    "example_group": [
+    "endpoints": [
         {
             "endpoint": "/user/getUserDeatils",
             "method": "GET",
             "backend_url_pattern": "/user/getUserDeatils",
             "backend_method": "GET",
-            "backend_host": "http://users:3000",
+            "z": "http://users:3000",
             "authPlugin":true,
             "permissions":"collection_report_write,role_assignment_write"
+        },
+        {
+            "endpoint": "/claims/return-orders/list/{id}",
+            "method": "POST",
+            "backend_url_pattern": "/claims/return-orders/list/{id}",
+            "backend_method": "POST",
+            "backend_host": "https://api-dev.beta.pharmconnect.com",
+            "authPlugin":true,
+            "permissions":""
         }
     ]
 }

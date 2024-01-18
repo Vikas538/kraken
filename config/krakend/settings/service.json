@@ -11,7 +11,17 @@
 		  }
 		},
 		"dev": {
-			"backend_host" :"hellrld"
-			},
-		"files":["endpoints_claims","endpoints_communication_v2"]
+			"port": 8080,
+			"host": "https://api-dev.beta.pharmconnect.com",
+			"serverSecretName": "pharmconnect-dev-server-jwt-configtesttest",
+			"jwtSecretName":"pharmconnect-dev-jwtConstants",
+			"name": "DEV"
+		},
+		"qa": {
+			"port": 8080,
+			"host": "https://api-qa.beta.pharmconnect.com",
+			"serverSecretName": "pharmconnect-qa-server-jwt-config",
+			"jwtSecretName":"pharmconnect-qa-jwtConstants",
+			"name": "QA"
+		}
 }
