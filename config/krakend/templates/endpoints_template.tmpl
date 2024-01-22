@@ -4,9 +4,15 @@
         {{ $data := dict "host" (index $.service $env "host") "serverSecretName" (index $.service $env "serverSecretName")  "endpoints" $endpoint   "jwtSecretName" (index $.service $env "jwtSecretName")  }} 
         {{template "endpointTemplate" $data}}
     {{end}},
-        {{ range $idx, $endpoint := .endpoints_communication_v2.endpoints }}{{if $idx}},{{end}}
+    {{ range $idx, $endpoint := .endpoints_communication_v2.endpoints }}{{if $idx}},{{end}}
+        {{ $env := env "ENV" }}
+        {{ $data := dict "host" (index $.service $env "host") "serverSecretName" (index $.service $env "serverSecretName")  "endpoints" $endpoint   "jwtSecretName" (index $.service $env "jwtSecretName")  }} 
+        {{template "endpointTemplate" $data}}
+    {{end}},
+    {{ range $idx, $endpoint := .endpoints_user.endpoints }}{{if $idx}},{{end}}
         {{ $env := env "ENV" }}
         {{ $data := dict "host" (index $.service $env "host") "serverSecretName" (index $.service $env "serverSecretName")  "endpoints" $endpoint   "jwtSecretName" (index $.service $env "jwtSecretName")  }} 
         {{template "endpointTemplate" $data}}
     {{end}}
+    
 

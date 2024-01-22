@@ -28,6 +28,45 @@ services:
   #   image: rabbitmq:3-management
   #   ports:
   #     - "15672:15672"
+  influxdb:
+    container_name: influx
+    image: influxdb:1.8.10
+    environment:
+      - "INFLUXDB_DB=krakend"
+      - "INFLUXDB_USER=krakend-dev"
+      - "INFLUXDB_USER_PASSWORD=pas5w0rd"
+      - "INFLUXDB_ADMIN_USER=admin"
+      - "INFLUXDB_ADMIN_PASSWORD=supersecretpassword"
+    ports:
+      - "8086:8086"
+    networks:
+      - shared_network
+  grafana:
+    image: grafana/grafana:9.1.2
+    ports:
+      - "4000:3000"
+    volumes:
+      - ./config/grafana/datasources/all.yml:/etc/grafana/provisioning/datasources/all.yml
+      - ./config/grafana/dashboards/all.yml:/etc/grafana/provisioning/dashboards/all.yml
+      - ./config/grafana/krakend:/var/lib/grafana/dashboards/krakend
+    networks:
+      - shared_network
+  elasticsearch:
+    image: elasticsearch:8.4.1
+    environment:
+      - "discovery.type=single-node"
+      - "xpack.security.enabled=false"
+      - "xpack.security.transport.ssl.enabled=false"
+      - "xpack.security.http.ssl.enabled=false"
+    ports:
+      - "19200:9200"
+      - "9300:9300"
+  jaeger:
+    container_name: jaeger
+    image: jaegertracing/all-in-one:1
+    ports:
+      - "16686:16686"
+      - "14268:14268"
 networks:
   shared_network:
     external: true
