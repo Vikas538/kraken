@@ -6,7 +6,25 @@
             "backend_url_pattern": "/user/getUserDeatils",
             "backend_method": "GET",
             "z": "http://users:3000",
-            "authPlugin":true,
+            "authPlugin":false,
+            "permissions":"collection_report_write,role_assignment_write"
+        },
+        {
+            "endpoint": "/user/health",
+            "method": "GET",
+            "backend_url_pattern": "/user/health",
+            "backend_method": "GET",
+            "z": "http://users:3000",
+            "authPlugin":false,
+            "permissions":"collection_report_write,role_assignment_write"
+        },
+        {
+            "endpoint": "/user/healthh",
+            "method": "POST",
+            "backend_url_pattern": "/user/health",
+            "backend_method": "POST",
+            "z": "http://users:3000",
+            "authPlugin":false,
             "permissions":"collection_report_write,role_assignment_write"
         },
         {

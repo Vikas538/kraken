@@ -4,368 +4,477 @@
   "name": "KrakenD API Gateway (dev)",
   "port": 8080,
   "timeout": "300s",
-  "cache_ttl":  "3s",
+  "cache_ttl": "3s",
   "output_encoding": "no-op",
-  "extra_config": {"router":{"return_error_msg":true}},
-  "plugin":  {
+  "extra_config": {
+    "router": {
+      "health_path": "/hub/kraken/__health",
+      "return_error_msg": true
+    },
+    "security/cors": {
+      "allow_headers": [
+        "Origin",
+        "Authorization",
+        "Content-Type"
+      ],
+      "allow_methods": [
+        "GET",
+        "HEAD",
+        "POST",
+        "DELETE",
+        "OPTIONS",
+        "PATCH",
+        "PUT"
+      ],
+      "allow_origins": [
+        "*"
+      ],
+      "exposed_headers": [
+        "Access-Control-Allow-Origin",
+        "Content-Length"
+      ]
+    },
+    "security/http": {
+      "browser_xss_filter": true,
+      "content_security_policy": "script-src 'strict-dynamic' 'nonce-rAnd0m123' 'unsafe-inline' http: https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; report-uri https://csp.example.com;",
+      "content_type_nosniff": true,
+      "frame_deny": true,
+      "host_proxy_headers": [
+        "X-Forwarded-Hosts"
+      ],
+      "is_development": false,
+      "referrer_policy": "same-origin",
+      "ssl_proxy_headers": {
+        "X-Forwarded-Proto": "https"
+      },
+      "sts_include_subdomains": true,
+      "sts_seconds": 31536000
+    },
+    "telemetry/opencensus": {
+      "exporters": {
+        "prometheus": {
+          "namespace": "krakend",
+          "port": 9091,
+          "tag_host": false,
+          "tag_method": true,
+          "tag_path": true,
+          "tag_statuscode": false
+        }
+      },
+      "reporting_period": 0,
+      "sample_rate": 100
+    }
+  },
+  "plugin": {
     "pattern": ".so",
     "folder": "/opt/krakend/plugins/"
   },
   "endpoints": [
-    
-        
-         
-        
-{
-            "endpoint":"/user/getUserDeatils",
-            "method":  "GET",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/user/getUserDeatils",
-                    "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                    ,"extra_config": {
-                         
-                                      "plugin/http-client": {
-                "name": "auth-plugin",
-                "auth-plugin": {
-                  "host": "https://api-dev.beta.pharmconnect.com",  
-                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
-                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
-                  "permissions": "collection_report_write,role_assignment_write"
-                }
+    {
+      "endpoint": "/user/getUserDeatils",
+      "method": "GET",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/user/getUserDeatils",
+          "method": "GET",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/user/health",
+      "method": "GET",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/user/health",
+          "method": "GET",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/user/healthh",
+      "method": "POST",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/user/health",
+          "method": "POST",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/claims/return-orders/list/{id}",
+      "method": "POST",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/claims/return-orders/list/{id}",
+          "method": "POST",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "host": "https://api-qa.beta.pharmconnect.com",
+                "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                "jwtSecretName": "pharmconnect-dev-jwtConstants",
+                "permissions": ""
               }
-                    }
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"/hub/claims/return-orders/list/{id}",
-            "method":  "POST",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/claims/return-orders/list/{id}",
-                    "method": "POST",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                    ,"extra_config": {
-                         
-                                      "plugin/http-client": {
-                "name": "auth-plugin",
-                "auth-plugin": {
-                  "host": "https://api-dev.beta.pharmconnect.com",  
-                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
-                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
-                  "permissions": ""
-                }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/communication-v2/api/channels/{id}",
+      "method": "GET",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/communication-v2/api/channels/{id}",
+          "method": "GET",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "host": "https://api-qa.beta.pharmconnect.com",
+                "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                "jwtSecretName": "pharmconnect-dev-jwtConstants",
+                "permissions": ""
               }
-                    }
-                    
-                }
-            ]
-    }
-
-    ,
-        
-        
-         
-        
-{
-            "endpoint":"/kraken/communication-v2/api/channels/{id}",
-            "method":  "GET",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/communication-v2/api/channels/{id}",
-                    "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                    ,"extra_config": {
-                         
-                                      "plugin/http-client": {
-                "name": "auth-plugin",
-                "auth-plugin": {
-                  "host": "https://api-dev.beta.pharmconnect.com",  
-                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
-                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
-                  "permissions": ""
-                }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/communication-v2/api/channel/member",
+      "method": "POST",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/communication-v2/api/channel/member",
+          "method": "POST",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "host": "https://api-qa.beta.pharmconnect.com",
+                "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                "jwtSecretName": "pharmconnect-dev-jwtConstants",
+                "permissions": ""
               }
-                    }
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"/kraken/communication-v2/api/channel/member",
-            "method":  "POST",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/communication-v2/api/channel/member",
-                    "method": "POST",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                    ,"extra_config": {
-                         
-                                      "plugin/http-client": {
-                "name": "auth-plugin",
-                "auth-plugin": {
-                  "host": "https://api-dev.beta.pharmconnect.com",  
-                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
-                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
-                  "permissions": ""
-                }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/communication-v2/api/channels/{id}",
+      "method": "DELETE",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/communication-v2/api/channels/{id}",
+          "method": "DELETE",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "host": "https://api-qa.beta.pharmconnect.com",
+                "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                "jwtSecretName": "pharmconnect-dev-jwtConstants",
+                "permissions": ""
               }
-                    }
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"/kraken/communication-v2/api/channels/{id}",
-            "method":  "DELETE",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/communication-v2/api/channels/{id}",
-                    "method": "DELETE",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                    ,"extra_config": {
-                         
-                                      "plugin/http-client": {
-                "name": "auth-plugin",
-                "auth-plugin": {
-                  "host": "https://api-dev.beta.pharmconnect.com",  
-                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
-                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
-                  "permissions": ""
-                }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/communication-v2/api/folder/{id}",
+      "method": "GET",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/communication-v2/api/folder/{id}",
+          "method": "GET",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "host": "https://api-qa.beta.pharmconnect.com",
+                "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                "jwtSecretName": "pharmconnect-dev-jwtConstants",
+                "permissions": ""
               }
-                    }
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"/kraken/communication-v2/api/folder/{id}",
-            "method":  "GET",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/communication-v2/api/folder/{id}",
-                    "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                    ,"extra_config": {
-                         
-                                      "plugin/http-client": {
-                "name": "auth-plugin",
-                "auth-plugin": {
-                  "host": "https://api-dev.beta.pharmconnect.com",  
-                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
-                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
-                  "permissions": ""
-                }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/communication-v2/api/folder/{id}",
+      "method": "POST",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/communication-v2/api/folder/{id}",
+          "method": "POST",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "host": "https://api-qa.beta.pharmconnect.com",
+                "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                "jwtSecretName": "pharmconnect-dev-jwtConstants",
+                "permissions": ""
               }
-                    }
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"/kraken/communication-v2/api/folder/{id}",
-            "method":  "POST",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/communication-v2/api/folder/{id}",
-                    "method": "POST",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                    ,"extra_config": {
-                         
-                                      "plugin/http-client": {
-                "name": "auth-plugin",
-                "auth-plugin": {
-                  "host": "https://api-dev.beta.pharmconnect.com",  
-                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
-                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
-                  "permissions": ""
-                }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/communication-v2/api/folder/{id}",
+      "method": "DELETE",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/communication-v2/api/folder/{id}",
+          "method": "DELETE",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "host": "https://api-qa.beta.pharmconnect.com",
+                "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                "jwtSecretName": "pharmconnect-dev-jwtConstants",
+                "permissions": ""
               }
-                    }
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"/kraken/communication-v2/api/folder/{id}",
-            "method":  "DELETE",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/communication-v2/api/folder/{id}",
-                    "method": "DELETE",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                    ,"extra_config": {
-                         
-                                      "plugin/http-client": {
-                "name": "auth-plugin",
-                "auth-plugin": {
-                  "host": "https://api-dev.beta.pharmconnect.com",  
-                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
-                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
-                  "permissions": ""
-                }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/communication-v2/api/channels/move/{id}",
+      "method": "POST",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/communication-v2/api/channels/move/{id}",
+          "method": "POST",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "host": "https://api-qa.beta.pharmconnect.com",
+                "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                "jwtSecretName": "pharmconnect-dev-jwtConstants",
+                "permissions": ""
               }
-                    }
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"/kraken/communication-v2/api/channels/move/{id}",
-            "method":  "POST",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/communication-v2/api/channels/move/{id}",
-                    "method": "POST",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                    ,"extra_config": {
-                         
-                                      "plugin/http-client": {
-                "name": "auth-plugin",
-                "auth-plugin": {
-                  "host": "https://api-dev.beta.pharmconnect.com",  
-                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
-                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
-                  "permissions": ""
-                }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/communication-v2/api/channels",
+      "method": "POST",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/communication-v2/api/channels",
+          "method": "POST",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "host": "https://api-qa.beta.pharmconnect.com",
+                "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                "jwtSecretName": "pharmconnect-dev-jwtConstants",
+                "permissions": ""
               }
-                    }
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"/kraken/communication-v2/api/channels",
-            "method":  "POST",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/communication-v2/api/channels",
-                    "method": "POST",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                    ,"extra_config": {
-                         
-                                      "plugin/http-client": {
-                "name": "auth-plugin",
-                "auth-plugin": {
-                  "host": "https://api-dev.beta.pharmconnect.com",  
-                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
-                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
-                  "permissions": ""
-                }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/communication-v2/api/channel/member",
+      "method": "GET",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/communication-v2/api/channel/member",
+          "method": "GET",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "host": "https://api-qa.beta.pharmconnect.com",
+                "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                "jwtSecretName": "pharmconnect-dev-jwtConstants",
+                "permissions": ""
               }
-                    }
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"/kraken/communication-v2/api/channel/member",
-            "method":  "GET",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/communication-v2/api/channel/member",
-                    "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                    ,"extra_config": {
-                         
-                                      "plugin/http-client": {
-                "name": "auth-plugin",
-                "auth-plugin": {
-                  "host": "https://api-dev.beta.pharmconnect.com",  
-                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
-                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
-                  "permissions": ""
-                }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/communication-v2/ping",
+      "method": "GET",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/communication-v2/api/ping",
+          "method": "GET",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/hub/communication-v2/api/channels/app/communication/{id}",
+      "method": "GET",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "*"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/communication-v2/api/channels/app/communication/{id}",
+          "method": "GET",
+          "host": [
+            "https://api-qa.beta.pharmconnect.com"
+          ],
+          "extra_config": {
+            "plugin/http-client": {
+              "name": "auth-plugin",
+              "auth-plugin": {
+                "host": "https://api-qa.beta.pharmconnect.com",
+                "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                "jwtSecretName": "pharmconnect-dev-jwtConstants",
+                "permissions": ""
               }
-                    }
-                    
-                }
-            ]
+            }
+          }
+        }
+      ]
     }
-
-    
-
-]
+  ]
 }
