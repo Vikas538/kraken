@@ -10,7 +10,7 @@
             "permissions":"collection_report_write,role_assignment_write"
         },
         {
-            "endpoint": "/user/health",
+            "endpoint": "hub/user/health",
             "method": "GET",
             "backend_url_pattern": "/user/health",
             "backend_method": "GET",
@@ -19,7 +19,7 @@
             "permissions":"collection_report_write,role_assignment_write"
         },
         {
-            "endpoint": "/user/healthh",
+            "endpoint": "hub/user/health",
             "method": "POST",
             "backend_url_pattern": "/user/health",
             "backend_method": "POST",

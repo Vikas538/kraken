@@ -98,6 +98,14 @@
             "backend_host": "https://api-dev.beta.pharmconnect.com",
             "authPlugin": true,
             "permissions": ""
-        }
+        },
+        {
+            "endpoint": "/hub/communication-v2/api/channels/leave",
+            "method": "GET",
+            "backend_url_pattern": "/communication-v2/api/channels/leave",
+            "backend_method": "GET",
+            "authPlugin": true,
+            "permissions": ""
+          }
     ]
 }
