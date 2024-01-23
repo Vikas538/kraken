@@ -1,0 +1,16 @@
+{
+   "endpoint": "/hub/getServerToken",
+   "method":  "GET",
+   "input_headers":["*"],
+    "input_query_strings": ["*"],
+   "backend": [
+   {
+     "url_pattern": "/getServerToken",
+     "host": ["{{ .host }}"],
+     "extra_config": {
+                        {{ $data := dict "host" .host "serverSecretName" .serverSecretName "permissions" "" "jwtSecretName" .jwtSecretName "getToken"  true}} 
+                        {{template "auth_plugin.tmpl" $data}}
+                    }
+   }
+   ]
+ }

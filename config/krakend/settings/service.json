@@ -59,7 +59,7 @@
 		},
 		"dev": {
 			"port": 8080,
-			"host": "https://api-qa.beta.pharmconnect.com",
+			"host": "https://api-dev.beta.pharmconnect.com",
 			"serverSecretName": "pharmconnect-dev-server-jwt-config",
 			"jwtSecretName":"pharmconnect-dev-jwtConstants",
 			"name": "DEV"
