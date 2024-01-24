@@ -1,0 +1,40 @@
+{
+    "endpoints": [
+        {
+            "endpoint": "/user/getUserDeatils",
+            "method": "GET",
+            "backend_url_pattern": "/user/getUserDeatils",
+            "backend_method": "GET",
+            "z": "http://users:3000",
+            "authPlugin":false,
+            "permissions":"collection_report_write,role_assignment_write"
+        },
+        {
+            "endpoint": "hub/user/health",
+            "method": "GET",
+            "backend_url_pattern": "/user/health",
+            "backend_method": "GET",
+            "z": "http://users:3000",
+            "authPlugin":false,
+            "permissions":"collection_report_write,role_assignment_write"
+        },
+        {
+            "endpoint": "hub/user/health",
+            "method": "POST",
+            "backend_url_pattern": "/user/health",
+            "backend_method": "POST",
+            "z": "http://users:3000",
+            "authPlugin":false,
+            "permissions":"collection_report_write,role_assignment_write"
+        },
+        {
+            "endpoint": "/hub/claims/return-orders/list/{id}",
+            "method": "POST",
+            "backend_url_pattern": "/claims/return-orders/list/{id}",
+            "backend_method": "POST",
+            "backend_host": "https://api-dev.beta.pharmconnect.com",
+            "authPlugin":true,
+            "permissions":""
+        }
+    ]
+}

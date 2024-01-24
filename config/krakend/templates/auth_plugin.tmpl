@@ -1,0 +1,12 @@
+              "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "{{ index . "host" }}",  
+                  "serverSecretName": "{{ index . "serverSecretName" }}",
+                  "jwtSecretName":"{{ index . "jwtSecretName" }}",
+                  "permissions": "{{ index . "permissions" }}"
+                    {{ if .getToken }}
+                       ,"isGetToken":true
+                    {{ end }}
+                }
+              }
