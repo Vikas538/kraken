@@ -32,8 +32,15 @@
             "method": "POST",
             "backend_url_pattern": "/claims/return-orders/list/{id}",
             "backend_method": "POST",
-            "backend_host": "https://api-dev.beta.pharmconnect.com",
             "authPlugin":true,
+            "permissions":""
+        },
+        {
+            "endpoint": "/hub/user/health",
+            "method": "GET",
+            "backend_url_pattern": "/user/health",
+            "backend_method": "GET",
+            "authPlugin":false,
             "permissions":""
         }
     ]

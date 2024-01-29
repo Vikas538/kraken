@@ -26,20 +26,18 @@
 				"PUT"
 			  ]
 		  },
-		  "telemetry/opencensus": {
-			"sample_rate": 100,
-			"reporting_period": 0,
-			"exporters": {
-			  "prometheus": {
-				  "port": 9091,
-				  "namespace": "krakend",
-				  "tag_host": false,
-				  "tag_path": true,
-				  "tag_method": true,
-				  "tag_statuscode": false
-			  }
-		  }
-		},	
+		  "telemetry/influx": {
+			"address": "http://influx:8086",
+			"ttl": "25s",
+			"buffer_size": 100,
+			"db": "krakend",
+			"username": "krakend-dev",
+			"password": "pas5w0rd"
+		  },
+		  "telemetry/metrics": {
+			"collection_time": "30s",
+			"listen_address": "127.0.0.1:8090"
+		  },	  
 		  "security/http":{
 			"ssl_proxy_headers": {
 				"X-Forwarded-Proto": "https"
@@ -55,7 +53,18 @@
 			"content_type_nosniff":true,
 			"browser_xss_filter":true,
 			"is_development": false
-		  }
+		  },
+		  "telemetry/opencensus": {
+			"sample_rate": 100,
+			"reporting_period": 0,
+			"exporters": {
+			  "jaeger": {
+				"endpoint": "http://jaeger:14268/api/traces",
+				"service_name":"krakend",
+				"buffer_max_count": 1000
+			  }
+			}
+		  }	  
 		},
 		"dev": {
 			"port": 8080,
