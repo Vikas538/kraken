@@ -1,0 +1,3 @@
+{{ range $index, $value := . }}
+        {{ if ne $index 0 }},{{ end }}"{{ $value }}"
+    {{end}}

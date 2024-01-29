@@ -16,7 +16,7 @@ services:
       - FC_OUT=out.json
       - SERVICE_NAME=KrakenD API Gateway
       - SERVICE_NAME2=test
-      - ENV=qa
+      - ENV=dev
     ports:
       - "1234:1234"
       - "8080:8080"
@@ -41,40 +41,40 @@ services:
       - "8086:8086"
     networks:
       - shared_network
-  grafana:
-    image: grafana/grafana:9.1.2
-    ports:
-      - "4000:3000"
-    volumes:
-      - ./config/grafana/datasources/all.yml:/etc/grafana/provisioning/datasources/all.yml
-      - ./config/grafana/dashboards/all.yml:/etc/grafana/provisioning/dashboards/all.yml
-      - ./config/grafana/krakend:/var/lib/grafana/dashboards/krakend
-    networks:
-      - shared_network
-  elasticsearch:
-    container_name: elasticsearch
-    image: elasticsearch:8.4.1
-    environment:
-      - "discovery.type=single-node"
-      - "xpack.security.enabled=false"
-      - "xpack.security.transport.ssl.enabled=false"
-      - "xpack.security.http.ssl.enabled=false"
-    ports:
-      - "19200:9200"
-      - "9300:9300"
-    networks:
-      - shared_network
-  jaeger:
-    container_name: jaeger
-    image: jaegertracing/all-in-one:1
-    environment:
-      - SPAN_STORAGE_TYPE=elasticsearch
-      - ES_SERVER_URLS=http://elasticsearch:9300
-    ports:
-      - "16686:16686"
-      - "14268:14268"
-    networks:
-      - shared_network
+  # grafana:
+  #   image: grafana/grafana:9.1.2
+  #   ports:
+  #     - "4000:3000"
+  #   volumes:
+  #     - ./config/grafana/datasources/all.yml:/etc/grafana/provisioning/datasources/all.yml
+  #     - ./config/grafana/dashboards/all.yml:/etc/grafana/provisioning/dashboards/all.yml
+  #     - ./config/grafana/krakend:/var/lib/grafana/dashboards/krakend
+  #   networks:
+  #     - shared_network
+  # elasticsearch:
+  #   container_name: elasticsearch
+  #   image: elasticsearch:8.4.1
+  #   environment:
+  #     - "discovery.type=single-node"
+  #     - "xpack.security.enabled=false"
+  #     - "xpack.security.transport.ssl.enabled=false"
+  #     - "xpack.security.http.ssl.enabled=false"
+  #   ports:
+  #     - "19200:9200"
+  #     - "9300:9300"
+  #   networks:
+  #     - shared_network
+  # jaeger:
+  #   container_name: jaeger
+  #   image: jaegertracing/all-in-one:1
+  #   environment:
+  #     - SPAN_STORAGE_TYPE=elasticsearch
+  #     - ES_SERVER_URLS=http://elasticsearch:9300
+  #   ports:
+  #     - "16686:16686"
+  #     - "14268:14268"
+  #   networks:
+  #     - shared_network
 networks:
   shared_network:
     external: true

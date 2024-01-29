@@ -14,12 +14,8 @@
         {{ $data := dict "host" (index $.service $env "host") "serverSecretName" (index $.service $env "serverSecretName")  "endpoints" $endpoint   "jwtSecretName" (index $.service $env "jwtSecretName")  }} 
         {{template "endpointTemplate" $data}}
     {{end}}
-<<<<<<< HEAD
     {{ if or (eq $env "dev") (eq $env "qa") }}
         {{ $data := dict "host" (index $.service $env "host") "serverSecretName" (index $.service $env "serverSecretName")  "jwtSecretName" (index $.service $env "jwtSecretName")  }} 
         ,{{ template "getTokenTemplate.tmpl" $data}}
     {{ end }}
-=======
-    
->>>>>>> fc9c02f9be75fe0625598b15555b7259337008f5
 

@@ -12,9 +12,6 @@
 		  },
 		  "security/cors": {
 			"exposed_headers": ["Access-Control-Allow-Origin", "Content-Length"],
-			"allow_origins": [
-			  "*"
-			],
 			"allow_headers": ["Origin", "Authorization", "Content-Type"],
 			"allow_methods": [
 				"GET",
@@ -28,16 +25,12 @@
 		  },
 		  "telemetry/influx": {
 			"address": "http://influx:8086",
-			"ttl": "25s",
+			"ttl": "24h",
 			"buffer_size": 100,
 			"db": "krakend",
 			"username": "krakend-dev",
 			"password": "pas5w0rd"
 		  },
-		  "telemetry/metrics": {
-			"collection_time": "30s",
-			"listen_address": "127.0.0.1:8090"
-		  },	  
 		  "security/http":{
 			"ssl_proxy_headers": {
 				"X-Forwarded-Proto": "https"
@@ -53,32 +46,43 @@
 			"content_type_nosniff":true,
 			"browser_xss_filter":true,
 			"is_development": false
-		  },
-		  "telemetry/opencensus": {
-			"sample_rate": 100,
-			"reporting_period": 0,
-			"exporters": {
-			  "jaeger": {
-				"endpoint": "http://jaeger:14268/api/traces",
-				"service_name":"krakend",
-				"buffer_max_count": 1000
-			  }
-			}
-		  }	  
+		  }
 		},
 		"dev": {
 			"port": 8080,
 			"host": "https://api-dev.beta.pharmconnect.com",
 			"serverSecretName": "pharmconnect-dev-server-jwt-config",
 			"jwtSecretName":"pharmconnect-dev-jwtConstants",
-			"name": "DEV"
+			"allowedOrigins": [
+				"*","test"
+			  ],
+			"name": "DEV",
+			"influx":{
+				"address": "http://influx:8086",
+				"ttl": "24h",
+				"buffer_size": 100,
+				"db": "krakend",
+				"username": "krakend-dev",
+				"password": "pas5w0rd"
+			  }
 		},
 		"qa": {
 			"port": 8080,
 			"host": "https://api-qa.beta.pharmconnect.com",
 			"serverSecretName": "pharmconnect-qa-server-jwt-config",
 			"jwtSecretName":"pharmconnect-qa-jwtConstants",
-			"name": "QA"
+			"name": "QA",
+			"allowedOrigins": [
+				"*"
+			  ],
+			  "influx" :{
+				"address": "http://influx:8086",
+				"ttl": "24h",
+				"buffer_size": 100,
+				"db": "krakend",
+				"username": "krakend-dev",
+				"password": "pas5w0rd"
+			  }
 		}
 }
 

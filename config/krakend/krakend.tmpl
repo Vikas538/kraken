@@ -6,7 +6,7 @@
   "timeout": "{{ .service.timeout }}",
   "cache_ttl":  "{{ .service.cache_ttl }}",
   "output_encoding": "{{ .service.output_encoding }}",
-  "extra_config": {{ marshal .service.extra_config }},
+  "extra_config": {{template "cors_plugin.tmpl" .}},
   "plugin": {{ include "jwt_plugin.tmpl" }},
   "endpoints": [{{template "endpoints_template.tmpl" .}}]
 }

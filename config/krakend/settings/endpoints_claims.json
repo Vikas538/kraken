@@ -34,14 +34,6 @@
             "backend_method": "POST",
             "authPlugin":true,
             "permissions":""
-        },
-        {
-            "endpoint": "/hub/user/health",
-            "method": "GET",
-            "backend_url_pattern": "/user/health",
-            "backend_method": "GET",
-            "authPlugin":false,
-            "permissions":""
         }
     ]
 }
