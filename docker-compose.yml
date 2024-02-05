@@ -3,7 +3,7 @@ services:
   krakend_ce:
     # The :watch image restarts the service automatically hen the configuration files change.
     # Do not use this image in production, it's meant to speed up your testing and development.
-    image: devopsfaith/krakend:watch
+    image: devopsfaith/krakend:2.5.0-watch
     container_name: krakend
     volumes:
       - ./config/krakend:/etc/krakend
@@ -26,21 +26,21 @@ services:
       - shared_network
   # rabbitmq:
   #   image: rabbitmq:3-management
-  #   ports:
+  #   ports:http://35.154.14.191:4000
   #     - "15672:15672"
-  influxdb:
-    container_name: influx
-    image: influxdb:1.8.10
-    environment:
-      - "INFLUXDB_DB=krakend"
-      - "INFLUXDB_USER=krakend-dev"
-      - "INFLUXDB_USER_PASSWORD=pas5w0rd"
-      - "INFLUXDB_ADMIN_USER=admin"
-      - "INFLUXDB_ADMIN_PASSWORD=supersecretpassword"
-    ports:
-      - "8086:8086"
-    networks:
-      - shared_network
+  # influxdb:
+  #   container_name: influx
+  #   image: influxdb:1.8.10
+  #   environment:
+  #     - "INFLUXDB_DB=krakend"
+  #     - "INFLUXDB_USER=krakend-dev"
+  #     - "INFLUXDB_USER_PASSWORD=pas5w0rd"
+  #     - "INFLUXDB_ADMIN_USER=admin"
+  #     - "INFLUXDB_ADMIN_PASSWORD=supersecretpassword"
+  #   ports:
+  #     - "8086:8086"
+  #   networks:
+  #     - shared_network
   # grafana:
   #   image: grafana/grafana:9.1.2
   #   ports:

@@ -9,43 +9,6 @@
 		"router": {
 			"return_error_msg": true,
 			"health_path": "/hub/kraken/__health"
-		  },
-		  "security/cors": {
-			"exposed_headers": ["Access-Control-Allow-Origin", "Content-Length"],
-			"allow_headers": ["Origin", "Authorization", "Content-Type"],
-			"allow_methods": [
-				"GET",
-				"HEAD",
-				"POST",
-				"DELETE",
-				"OPTIONS",
-				"PATCH",
-				"PUT"
-			  ]
-		  },
-		  "telemetry/influx": {
-			"address": "http://influx:8086",
-			"ttl": "24h",
-			"buffer_size": 100,
-			"db": "krakend",
-			"username": "krakend-dev",
-			"password": "pas5w0rd"
-		  },
-		  "security/http":{
-			"ssl_proxy_headers": {
-				"X-Forwarded-Proto": "https"
-			  },
-			  "host_proxy_headers":[
-				"X-Forwarded-Hosts"
-			  ], 
-			  "frame_deny": true,
-			  "referrer_policy": "same-origin",
-			"sts_include_subdomains":true,
-			"sts_seconds":31536000,
-			"content_security_policy":"script-src 'strict-dynamic' 'nonce-rAnd0m123' 'unsafe-inline' http: https:; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script'; report-uri https://csp.example.com;",
-			"content_type_nosniff":true,
-			"browser_xss_filter":true,
-			"is_development": false
 		  }
 		},
 		"dev": {
@@ -54,13 +17,14 @@
 			"serverSecretName": "pharmconnect-dev-server-jwt-config",
 			"jwtSecretName":"pharmconnect-dev-jwtConstants",
 			"allowedOrigins": [
-				"*","test"
+				"*"
 			  ],
 			"name": "DEV",
+			"metricsEnabled":false,
 			"influx":{
-				"address": "http://influx:8086",
-				"ttl": "24h",
-				"buffer_size": 100,
+				"address": "http://influx:80/",
+				"ttl": "10s",
+				"buffer_size": 0,
 				"db": "krakend",
 				"username": "krakend-dev",
 				"password": "pas5w0rd"
@@ -72,6 +36,7 @@
 			"serverSecretName": "pharmconnect-qa-server-jwt-config",
 			"jwtSecretName":"pharmconnect-qa-jwtConstants",
 			"name": "QA",
+			"metricsEnabled":true,
 			"allowedOrigins": [
 				"*"
 			  ],

@@ -1,39 +1,139 @@
 {
     "endpoints": [
-        {
-            "endpoint": "/user/getUserDeatils",
-            "method": "GET",
-            "backend_url_pattern": "/user/getUserDeatils",
-            "backend_method": "GET",
-            "z": "http://users:3000",
-            "authPlugin":false,
-            "permissions":"collection_report_write,role_assignment_write"
-        },
-        {
-            "endpoint": "hub/user/health",
-            "method": "GET",
-            "backend_url_pattern": "/user/health",
-            "backend_method": "GET",
-            "z": "http://users:3000",
-            "authPlugin":false,
-            "permissions":"collection_report_write,role_assignment_write"
-        },
-        {
-            "endpoint": "hub/user/health",
-            "method": "POST",
-            "backend_url_pattern": "/user/health",
-            "backend_method": "POST",
-            "z": "http://users:3000",
-            "authPlugin":false,
-            "permissions":"collection_report_write,role_assignment_write"
-        },
-        {
-            "endpoint": "/hub/claims/return-orders/list/{id}",
-            "method": "POST",
-            "backend_url_pattern": "/claims/return-orders/list/{id}",
-            "backend_method": "POST",
-            "authPlugin":true,
-            "permissions":""
-        }
+            {
+              "endpoint": "/hub/claims/batch/{id}",
+              "method":"POST",
+              "backend_url_pattern": "/claims/batch/{id}",
+              "backend_method": "POST",
+              "authPlugin": true,
+              "permissions": ""
+            },
+            {
+              "endpoint": "/hub/claims/batch/{id}/search",
+              "method":"POST",
+              "backend_url_pattern": "/claims/batch/{id}/search",
+              "backend_method": "POST",
+              "authPlugin": true,
+              "permissions": "product_read,invoice_read"
+            },
+            {
+              "endpoint": "/hub/claims/return-orders/{id}",
+              "method":"POST",
+              "backend_url_pattern": "/claims/return-orders/{id}",
+              "backend_method": "POST",
+              "authPlugin": true,
+              "permissions": "claim_read,claim_write"
+            },
+            {
+              "endpoint": "/hub/claims/return-orders/details/{id}",
+              "method":"POST",
+              "backend_url_pattern": "/claims/return-orders/details/{id}",
+              "backend_method": "POST",
+              "authPlugin": true,
+              "permissions": "claim_read"
+            },
+            {
+              "endpoint": "/hub/claims/return-orders/list/{id}",
+              "method":"POST",
+              "backend_url_pattern": "/claims/return-orders/list/{id}",
+              "backend_method": "POST",
+              "authPlugin": true,
+              "permissions": "claim_read"
+            },
+            {
+              "endpoint": "/hub/claims/return-orders/update/bycustomer/{id}",
+              "method":"POST",
+              "backend_url_pattern": "/claims/return-orders/update/bycustomer/{id}",
+              "backend_method": "POST",
+              "authPlugin": true,
+              "permissions": "claim_read,claim_write"
+            },
+            {
+              "endpoint": "/hub/claims/return-orders/update/{id}",
+              "method":"POST",
+              "backend_url_pattern": "/claims/return-orders/update/{id}",
+              "backend_method": "POST",
+              "authPlugin": true,
+              "permissions": "claim_read,claim_write"
+            },
+            {
+              "endpoint": "/hub/claims/return-orders/webhook/email/{id}",
+              "method":"POST",
+              "backend_url_pattern": "/claims/return-orders/webhook/email/{id}",
+              "backend_method": "POST",
+              "authPlugin": true,
+              "permissions": "claim_read,claim_write"
+            },
+            {
+              "endpoint": "/hub/claims/return-orders/download/{id}",
+              "method":"GET",
+              "backend_url_pattern": "/claims/return-orders/download/{id}",
+              "backend_method": "GET",
+              "authPlugin": true,
+              "permissions": ""
+            },{
+                "endpoint": "/hub/claims/return-orders/download/{id}",
+                "method":"POST",
+                "backend_url_pattern": "/claims/return-orders/download/{id}",
+                "backend_method": "POST",
+                "authPlugin": true,
+                "permissions": "claim_read"
+              },
+            {
+              "endpoint": "/hub/claims/return-orders/cumulative/{id}",
+              "method":"POST",
+              "backend_url_pattern": "/claims/return-orders/cumulative/{id}",
+              "backend_method": "POST",
+              "authPlugin": true,
+              "permissions": ""
+            },
+            {
+              "endpoint": "/hub/claims/return-orders/ticket/resolve/{id}",
+              "method":"POST",
+              "backend_url_pattern": "/claims/return-orders/ticket/resolve/{id}",
+              "backend_method": "POST",
+              "authPlugin": true,
+              "permissions": "order_read,order_write"
+            },
+            {
+              "endpoint": "/hub/claims/return-orders/outbound/{id}",
+              "method":"GET",
+              "backend_url_pattern": "/claims/return-orders/outbound/{id}",
+              "backend_method": "GET",
+              "authPlugin": true,
+              "permissions": "order_read,order_write"
+            },
+            { 
+              "endpoint": "/hub/claims/return-orders/upload/{id}",
+              "method":"POST",
+              "backend_url_pattern": "/claims/return-orders/upload/{id}",
+              "backend_method": "POST",
+              "authPlugin": true,
+              "permissions": ""
+            },
+            {
+              "endpoint": "/hub/claims/ping",
+              "method":"GET",
+              "backend_url_pattern": "/claims/ping",
+              "backend_method": "GET",
+              "authPlugin": true,
+              "permissions": ""
+            },
+            {
+              "endpoint": "/hub/claims/credit-notes",
+              "method":"POST",
+              "backend_url_pattern": "/claims/credit-notes",
+              "backend_method": "POST",
+              "authPlugin": false,
+              "permissions": ""
+            },
+            {
+              "endpoint": "/hub/claims/health",
+              "method":"GET",
+              "backend_url_pattern": "/claims/health",
+              "backend_method": "GET",
+              "authPlugin": false,
+              "permissions": ""
+            }
     ]
 }

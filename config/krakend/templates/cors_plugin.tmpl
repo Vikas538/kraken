@@ -17,7 +17,16 @@
 				"PUT"
 			  ]
 		  },
-		  "telemetry/influx": {{template "influx_conf.tmpl" index .service (env "ENV") "influx" }},
+
+		 {{ if index .service (env "ENV") "metricsEnabled" }}
+                     		  "telemetry/influx": {{template "influx_conf.tmpl" index .service (env "ENV") "influx" }},
+		  "telemetry/metrics": {
+			"collection_time": "30s",
+			"listen_address": "127.0.0.1:8090"
+		  },
+        {{ end }}
+
+
 		  "security/http":{
 			"ssl_proxy_headers": {
 				"X-Forwarded-Proto": "https"

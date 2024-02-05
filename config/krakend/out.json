@@ -16,8 +16,6 @@
 			"allow_headers": ["Origin", "Authorization", "Content-Type"],
             "allow_origins": [
         "*"
-    
-        ,"test"
     ],
 			"allow_methods": [
 				"GET",
@@ -29,14 +27,10 @@
 				"PUT"
 			  ]
 		  },
-		  "telemetry/influx": {
-				"address": "http://influx:8086",
-				"ttl": "24h",
-				"buffer_size": 100,
-				"db": "krakend",
-				"username": "krakend-dev",
-				"password": "pas5w0rd"
-			  },
+
+		 
+
+
 		  "security/http":{
 			"ssl_proxy_headers": {
 				"X-Forwarded-Proto": "https"
@@ -65,72 +59,15 @@
          
         
 {
-            "endpoint":"/user/getUserDeatils",
-            "method":  "GET",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/user/getUserDeatils",
-                    "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"hub/user/health",
-            "method":  "GET",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/user/health",
-                    "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"hub/user/health",
+            "endpoint":"/hub/claims/batch/{id}",
             "method":  "POST",
             "input_headers":["*"],
             "input_query_strings": ["*"],
             "backend": [
                 {
-                    "url_pattern": "/user/health",
+                    "url_pattern": "/claims/batch/{id}",
                     "method": "POST",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
-                    
-                }
-            ]
-    }
-
-    ,
-        
-         
-        
-{
-            "endpoint":"/hub/claims/return-orders/list/{id}",
-            "method":  "POST",
-            "input_headers":["*"],
-            "input_query_strings": ["*"],
-            "backend": [
-                {
-                    "url_pattern": "/claims/return-orders/list/{id}",
-                    "method": "POST",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -151,6 +88,506 @@
     }
 
     ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/batch/{id}/search",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/batch/{id}/search",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": "product_read,invoice_read"
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/{id}",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/{id}",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": "claim_read,claim_write"
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/details/{id}",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/details/{id}",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": "claim_read"
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/list/{id}",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/list/{id}",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": "claim_read"
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/update/bycustomer/{id}",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/update/bycustomer/{id}",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": "claim_read,claim_write"
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/update/{id}",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/update/{id}",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": "claim_read,claim_write"
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/webhook/email/{id}",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/webhook/email/{id}",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": "claim_read,claim_write"
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/download/{id}",
+            "method":  "GET",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/download/{id}",
+                    "method": "GET",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": ""
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/download/{id}",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/download/{id}",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": "claim_read"
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/cumulative/{id}",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/cumulative/{id}",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": ""
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/ticket/resolve/{id}",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/ticket/resolve/{id}",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": "order_read,order_write"
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/outbound/{id}",
+            "method":  "GET",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/outbound/{id}",
+                    "method": "GET",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": "order_read,order_write"
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/return-orders/upload/{id}",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/return-orders/upload/{id}",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": ""
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/ping",
+            "method":  "GET",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/ping",
+                    "method": "GET",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                    ,"extra_config": {
+                         
+                                      "plugin/http-client": {
+                "name": "auth-plugin",
+                "auth-plugin": {
+                  "host": "https://api-dev.beta.pharmconnect.com",  
+                  "serverSecretName": "pharmconnect-dev-server-jwt-config",
+                  "jwtSecretName":"pharmconnect-dev-jwtConstants",
+                  "permissions": ""
+                    
+                }
+              }
+                    }
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/credit-notes",
+            "method":  "POST",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/credit-notes",
+                    "method": "POST",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                }
+            ]
+    }
+
+    ,
+        
+         
+        
+{
+            "endpoint":"/hub/claims/health",
+            "method":  "GET",
+            "input_headers":["*"],
+            "input_query_strings": ["*"],
+            "backend": [
+                {
+                    "url_pattern": "/claims/health",
+                    "method": "GET",
+                    "host": ["http://192.168.1.10:3007"]
+                    
+                }
+            ]
+    }
+
+    ,
     
         
          
@@ -164,7 +601,7 @@
                 {
                     "url_pattern": "/communication-v2/api/channels/{id}",
                     "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -197,7 +634,7 @@
                 {
                     "url_pattern": "/communication-v2/api/channel/member",
                     "method": "POST",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -230,7 +667,7 @@
                 {
                     "url_pattern": "/communication-v2/api/channels/{id}",
                     "method": "DELETE",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -263,7 +700,7 @@
                 {
                     "url_pattern": "/communication-v2/api/folder/{id}",
                     "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -296,7 +733,7 @@
                 {
                     "url_pattern": "/communication-v2/api/folder/{id}",
                     "method": "POST",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -329,7 +766,7 @@
                 {
                     "url_pattern": "/communication-v2/api/folder/{id}",
                     "method": "DELETE",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -362,7 +799,7 @@
                 {
                     "url_pattern": "/communication-v2/api/channels/move/{id}",
                     "method": "POST",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -395,7 +832,7 @@
                 {
                     "url_pattern": "/communication-v2/api/channels",
                     "method": "POST",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -428,7 +865,7 @@
                 {
                     "url_pattern": "/communication-v2/api/channel/member",
                     "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -461,7 +898,7 @@
                 {
                     "url_pattern": "/communication-v2/api/ping",
                     "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                 }
             ]
@@ -480,7 +917,7 @@
                 {
                     "url_pattern": "/communication-v2/api/channels/app/communication/{id}",
                     "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -513,7 +950,7 @@
                 {
                     "url_pattern": "/communication-v2/api/channels/leave",
                     "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                     ,"extra_config": {
                          
@@ -547,7 +984,7 @@
                 {
                     "url_pattern": "/user/health",
                     "method": "GET",
-                    "host": ["https://api-dev.beta.pharmconnect.com"]
+                    "host": ["http://192.168.1.10:3007"]
                     
                 }
             ]

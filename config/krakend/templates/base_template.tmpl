@@ -8,7 +8,7 @@
                 {
                     "url_pattern": "{{ .endpoints.backend_url_pattern }}",
                     "method": "{{ .endpoints.backend_method }}",
-                    "host": ["{{ .host }}"]
+                    "host": ["http://192.168.1.10:3007"]
                     {{ if  .endpoints.authPlugin  }}
                     ,"extra_config": {
                         {{ $data := dict "host" .host "serverSecretName" .serverSecretName "permissions" .endpoints.permissions "jwtSecretName" .jwtSecretName}} 

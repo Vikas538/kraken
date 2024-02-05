@@ -143,6 +143,8 @@ func (r registerer) registerClients(_ context.Context, extra map[string]interfac
 			// Handle the case when the value is not a string or the key is not present
 			isGetToken = false
 		}
+
+		fmt.Println("=====================================> After is Get token",isGetToken)
 		
 		permissionSlice := strings.Split(permissions, ",")
 		if serverSecretKey == "" {
@@ -163,12 +165,19 @@ func (r registerer) registerClients(_ context.Context, extra map[string]interfac
 			jwtSecretKey = serverKey["secret"].(string)
 		}
 
-		header := req.Header.Get("Authorization")
-		authTokenString := strings.Split(header, " ")[1]
 
-		payload, err := parseToken(authTokenString, []byte(jwtSecretKey))
+		header := req.Header.Get("Authorization")
+		authTokenString := strings.Split(header, " ")
+		fmt.Print("=======================>",authTokenString)
+		if len(authTokenString)<=1 {
+			http.Error(w, "Unauthorzed", http.StatusUnauthorized)
+			return
+		}
+
+
+		payload, err := parseToken(authTokenString[1], []byte(jwtSecretKey))
 		if err != nil {
-			http.Error(w, "Unauthorzed Bye Bye", http.StatusUnauthorized)
+			http.Error(w, "Unauthorzed", http.StatusUnauthorized)
 			return
 		}
 		userType := getUserType(payload)
@@ -179,7 +188,8 @@ func (r registerer) registerClients(_ context.Context, extra map[string]interfac
 		if len(permissions) > 0 {
 		rolesAndPermission, e := getRoles(url+"/all/workspaces/roles/permissions", []byte(serverSecretKey))
 		if e != nil {
-			panic(e)
+			http.Error(w, "Error fetching roles", http.StatusInternalServerError)
+			return
 		}
 			userPermitted, errorCheckingPermissions := checkUserPermissions(workspaceRoles, permissionSlice, userType, *rolesAndPermission)
 			if errorCheckingPermissions != nil {
@@ -229,11 +239,24 @@ func (r registerer) registerClients(_ context.Context, extra map[string]interfac
 			return
 		}
 		if isGetToken {
-			w.Write([]byte(serverTokenStringWithUserData))
+			var serverTokenToReturn = map[string]interface{}{
+				"token": serverTokenStringWithUserData,
+			}
+			resposeBody ,_:= json.Marshal(serverTokenToReturn)
+			if err != nil {
+			http.Error(w, "Error marshaling response to JSON", http.StatusInternalServerError)
+			return
 		}
+			w.Write(resposeBody)
+			w.WriteHeader(http.StatusAccepted)
+			return 
+		}
+		fmt.Print("=======================>",serverTokenStringWithUserData)
 		req.Header.Set("Authorization", "Bearer "+serverTokenStringWithUserData)
+		// contextHeader:= req.Header.Get('Content-Type')
+		fmt.Print("=================Headers",)
 		// Set the content type to JSON
-		req.Header.Set("Content-Type", "application/json")
+		// req.Header.Set("Content-Type", "application/json")
 
 		resp, err := http.DefaultClient.Do(req)
 		if err != nil {
@@ -247,10 +270,12 @@ func (r registerer) registerClients(_ context.Context, extra map[string]interfac
 				w.Header().Add(k, h)
 			}
 		}
+		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(resp.StatusCode)
 		if resp.Body == nil {
-			return
+			return 
 		}
+		fmt.Print("===============================>responseBody",resp.Body)
 		io.Copy(w, resp.Body)
 		resp.Body.Close()
 	}), nil
@@ -301,6 +326,7 @@ func getSellerWorkSpaceIdFromBody(r *http.Request) string {
 
 func getSellerWorkSpaceId(r *http.Request) string {
 	workspaceId := getSellerWorkSpaceIdFromQuery(r)
+	fmt.Println("================================>WorkspaceId",workspaceId)
 	if workspaceId == "" {
 		workspaceId = getSellerWorkSpaceIdFromBody(r)
 	}
